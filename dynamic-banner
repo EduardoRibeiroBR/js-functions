@@ -1,0 +1,71 @@
+  This is a dynamic banner that changes it image every 4 seconds. It´s useful in a commercial website. It have buttons to control the actions
+
+
+// you can see this banner working at 'pozolanaconstrucoes.atwebpages.com'
+
+var banners = ['img/banners/banner1.jpg', 'img/banners/banner2.jpg', 'img/banners/banner3.jpg', 'img/banners/banner4.jpg']; // This array gets 4 images to use in the banner 
+var currentBanner = 0;
+
+function nextBanner(){ // this function changes the img to the next one 
+  if(currentBanner == 0){
+    currentBanner = 1;
+  }else if(currentBanner == 1){
+    currentBanner = 2;
+  }else if(currentBanner == 2){
+    currentBanner = 3;
+  }else if(currentBanner == 3){
+    currentBanner = 0;
+  }
+  document.querySelector('#principalBanner').src = banners[currentBanner];
+}
+
+function previousBanner(){ // changes to previous img
+  if(currentBanner == 0){
+    currentBanner = 3;
+  }else if(currentBanner == 3){
+    currentBanner = 2;
+  }else if(currentBanner == 2){
+    currentBanner = 1;
+  }else if(currentBanner == 1){
+    currentBanner = 0;
+  }
+
+  document.querySelector('#principalBanner').src = banners[currentBanner];
+}
+
+var interval = setInterval(nextBanner, 4000); // changes the img every 4 seconds
+
+/* buttons of #principalBanner */
+
+$('.right').click( function(){
+  clearInterval(interval);
+
+  nextBanner();
+  interval = setInterval(nextBanner, 4000); 
+} )
+
+$('.left').click( function() {
+  clearInterval(interval);
+
+  previousBanner();
+  interval = setInterval(nextBanner, 4000); 
+} )
+
+var control = document.querySelector('.pause');
+
+control.onclick = function(){
+    if(control.className == 'pause'){
+        clearInterval(interval);
+        control.className = 'play';
+        control.innerHTML = '&#9658;';
+        document.querySelector('.right').style.display = "none";
+        document.querySelector('.left').style.display = "none";
+    } else {
+        clearInterval(interval);
+        interval = setInterval(nextBanner, 4000);
+        control.className = 'pause';
+        control.innerHTML = '&#10074;&#10074;';
+        document.querySelector('.right').style.display = "block";
+        document.querySelector('.left').style.display = "block";
+    }
+}
