@@ -1,7 +1,11 @@
 
 function primo(numero){
 
-    if(numero === 1 || numero === 2 || numero === 3 || numero === 5 || numero === 7) { // verifica de o parametro é igual a 1, 2, 3, 5 ou 7
+
+    if (numero === 1){
+      return false;
+    }
+    if( numero === 2 || numero === 3 || numero === 5 || numero === 7) { // verifica de o parametro é igual a 1, 2, 3, 5 ou 7
       return true; // é primo
     }else if(numero % 2 === 0 || numero % 3 === 0 || numero % 5 === 0 || numero % 7 === 0){ // verifica se o paramentro é divisível pelos mesmos números acima
       return false; // n é primo 
